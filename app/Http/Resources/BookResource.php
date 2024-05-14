@@ -26,8 +26,8 @@ class BookResource extends JsonResource
             'isbn_formatted' => $formatted,
             'value' => $this->value,
             'stores' => new StoreCollection($this->whenLoaded('stores')),
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            // 'created_at' => $this->created_at,
+            // 'updated_at' => $this->updated_at,
         ];
     }
 

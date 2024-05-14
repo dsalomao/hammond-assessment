@@ -9,6 +9,13 @@ class Store extends Model
 {
     use HasFactory;
 
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'address', 'active'];
+
     public function books()
     {
         return $this->belongsToMany(Book::class, 'book_store');
