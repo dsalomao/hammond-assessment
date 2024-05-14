@@ -42,7 +42,10 @@ class StoreRepository extends BaseRepository implements StoreRepositoryInterface
     {
         $store->update($params);
 
-        return $store->fresh();
+        if (array_key_exists('book_ids', $params))
+            $store->books()->sync($params['book_ids']);
+
+        return $store->fresh()->load('books');
     }
 
     public function delete(Store $store): bool

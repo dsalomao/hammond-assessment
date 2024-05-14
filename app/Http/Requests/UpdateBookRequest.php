@@ -25,7 +25,9 @@ class UpdateBookRequest extends FormRequest
         return [
             'name' => 'string',
             'isbn' => ['string', new Isbn],
-            'value' => 'numeric|decimal:0,2|between:10,999.99'
+            'value' => 'numeric|decimal:0,2|between:10,999.99',
+            'store_ids' => 'array',
+            'store_ids.*' => 'exists:stores,id'
         ];
     }
 }

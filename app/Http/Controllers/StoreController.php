@@ -40,7 +40,7 @@ class StoreController extends Controller
      */
     public function show(Store $store)
     {
-        return new StoreResource($store);
+        return new StoreResource($store->load('books'));
     }
 
     /**

@@ -42,7 +42,10 @@ class BookRepository extends BaseRepository implements BookRepositoryInterface
     {
         $book->update($params);
 
-        return $book->fresh();
+        if (array_key_exists('store_ids', $params))
+            $book->stores()->sync($params['store_ids']);
+
+        return $book->fresh()->load('stores');
     }
 
     public function delete(Book $book): bool

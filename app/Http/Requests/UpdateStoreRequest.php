@@ -24,7 +24,9 @@ class UpdateStoreRequest extends FormRequest
         return [
             'name' => 'string',
             'address' => 'string|max:255',
-            'active' => 'boolean'
+            'active' => 'boolean',
+            'book_ids' => 'array',
+            'book_ids.*' => 'exists:books,id'
         ];
     }
 }
