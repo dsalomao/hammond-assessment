@@ -26,4 +26,27 @@ class BookRepository extends BaseRepository implements BookRepositoryInterface
     {
         return $this->model->with('stores')->get();
     }
+
+    /**
+     * @return Book
+     */
+    public function store(array $params): Book
+    {
+        return $this->model->create($params);
+    }
+
+    /**
+     * @return Book
+     */
+    public function update(Book $book, array $params): Book
+    {
+        $book->update($params);
+
+        return $book->fresh();
+    }
+
+    public function delete(Book $book): bool
+    {
+        return $book->delete();
+    }
 }

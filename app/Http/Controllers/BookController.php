@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Http\Resources\BookCollection;
+use App\Http\Resources\BookResource;
+use App\Http\Resources\StoreCollection;
 use App\Models\Book;
 use App\Repositories\Eloquent\BookRepository;
 
@@ -30,7 +32,7 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        //
+        return new BookResource($this->repository->store($request->all()));
     }
 
     /**
@@ -38,7 +40,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return new BookResource($book);
     }
 
     /**
@@ -46,7 +48,7 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-        //
+        return new BookResource($this->repository->update($book, $request->all()));
     }
 
     /**
@@ -54,6 +56,17 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        if(!$this->repository->delete($book))
+            return response()->json([], 409);
+
+        return response()->json([], 204);
+    }
+
+    /**
+     * Display Related Stores Resource.
+     */
+    public function stores(Book $book)
+    {
+        return new StoreCollection($book->stores);
     }
 }

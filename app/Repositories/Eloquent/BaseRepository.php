@@ -9,15 +9,15 @@ use Illuminate\Support\Arr;
 
 class BaseRepository implements EloquentRepositoryInterface
 {
-    /**      
-     * @var Model      
+    /**
+     * @var Model
      */
     protected $model;
 
-    /**      
-     * BaseRepository constructor.      
-     *      
-     * @param Model $model      
+    /**
+     * BaseRepository constructor.
+     *
+     * @param Model $model
      */
     public function __construct(Model $model)
     {

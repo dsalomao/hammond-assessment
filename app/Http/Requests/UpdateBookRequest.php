@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Isbn;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateBookRequest extends FormRequest
@@ -11,7 +12,7 @@ class UpdateBookRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,9 @@ class UpdateBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'string',
+            'isbn' => ['string', new Isbn],
+            'value' => 'numeric|decimal:0,2|between:10,999.99'
         ];
     }
 }
